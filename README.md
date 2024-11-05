@@ -29,10 +29,16 @@
    ```bash
    git clone https://github.com/tu-usuario/movie-api.git
 
-2.
-  ```bash
-  dotnet ef database update
+2. Configura la base de datos en appsettings.json.
 
-3.
-  ```bash
-  dotnet run
+3. Aplica las migraciones de EF Core
+   ```bash
+   dotnet ef database update
+  
+4. Ejecuta el proyecto
+   ```bash
+   dotnet run
+
+🧪Pruebas
+```bash
+   dotnet test
