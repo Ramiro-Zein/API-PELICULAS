@@ -27,7 +27,7 @@
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/movie-api.git
+   git https://github.com/Ramiro-Zein/API-PELICULAS.git
 
 2. Configura la base de datos en appsettings.json.
 
