@@ -8,6 +8,7 @@ public class Usuario
     [Required] public string NombreUsuario { get; set; }
     [Required] public string ClaveUsuario { get; set; }
     [Required] public Estatus EstatusUsuario { get; set; }
+    public ICollection<Historial> Historiales { get; set; }
     
     public enum Estatus
     {

@@ -1,7 +1,18 @@
-﻿namespace API_PELICULAS.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_PELICULAS.Models;
 
 public class Genero
 {
-    public Guid IdGenero { get; set; }
-    public string NombreGenero { get; set; }
+    [Key] public Guid IdGenero { get; set; }
+    [Required] public GeneroPelicula NombreGenero { get; set; }
+    public ICollection<PeliculaGenero> PeliculaGeneros { get; set; }
+    
+    public enum GeneroPelicula
+    {
+        Accion,
+        Romance,
+        Comedia,
+        Drama
+    }
 }
