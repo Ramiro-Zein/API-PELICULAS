@@ -32,83 +32,121 @@ public class PeliculasDbContext : DbContext
 
         // Relación uno a muchos entre Usuario y Historial
         modelBuilder.Entity<Historial>()
+            .HasOne(h => h.Pelicula)
+            .WithMany()
+            .HasForeignKey(h => h.IdPelicula)
+            .IsRequired();
+
+        modelBuilder.Entity<Historial>()
             .HasOne(h => h.Usuario)
             .WithMany(u => u.Historiales)
-            .HasForeignKey(h => h.IdUsuario);
+            .HasForeignKey(h => h.IdUsuario)
+            .IsRequired();
 
-        var usuarios = new List<Usuario>
-        {
+        var accionGuid = Guid.Parse("12345678-1234-1234-1234-1234567890ab");
+        var comediaGuid = Guid.Parse("23456789-2345-2345-2345-2345678901bc");
+        var dramaGuid = Guid.Parse("34567890-3456-3456-3456-3456789012cd");
+        var romanceGuid = Guid.Parse("45678901-4567-4567-4567-4567890123de");
+
+        modelBuilder.Entity<Genero>().HasData(
+            new Genero { IdGenero = accionGuid, NombreGenero = Genero.GeneroPelicula.Accion },
+            new Genero { IdGenero = comediaGuid, NombreGenero = Genero.GeneroPelicula.Comedia },
+            new Genero { IdGenero = dramaGuid, NombreGenero = Genero.GeneroPelicula.Drama },
+            new Genero { IdGenero = romanceGuid, NombreGenero = Genero.GeneroPelicula.Romance }
+        );
+
+        // Datos de Usuarios
+        var usuario1Guid = Guid.Parse("56789012-5678-5678-5678-5678901234ef");
+        var usuario2Guid = Guid.Parse("67890123-6789-6789-6789-6789012345f0");
+
+        modelBuilder.Entity<Usuario>().HasData(
             new Usuario
             {
-                IdUsuario = Guid.Parse("0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"), NombreUsuario = "usuario1",
-                ClaveUsuario = "clave1", EstatusUsuario = Usuario.Estatus.Activo
+                IdUsuario = usuario1Guid, NombreUsuario = "ramiro.zein", ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("1234"),
+                EstatusUsuario = Usuario.Estatus.Activo
             },
             new Usuario
             {
-                IdUsuario = Guid.Parse("1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e"), NombreUsuario = "usuario2",
-                ClaveUsuario = "clave2", EstatusUsuario = Usuario.Estatus.Activo
-            },
-            new Usuario
-            {
-                IdUsuario = Guid.Parse("2c3d4e5f-6a7b-8c9d-0e1f-2a3b4c5d6e7f"), NombreUsuario = "usuario3",
-                ClaveUsuario = "clave3", EstatusUsuario = Usuario.Estatus.Inactivo
+                IdUsuario = usuario2Guid, NombreUsuario = "maria.lopez", ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("nel"),
+                EstatusUsuario = Usuario.Estatus.Inactivo
             }
-        };
+        );
 
-        var generos = new List<Genero>
-        {
-            new Genero { IdGenero = Guid.Parse("3d4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f8a"), NombreGenero = Genero.GeneroPelicula.Accion },
-            new Genero { IdGenero = Guid.Parse("4e5f6a7b-8c9d-0e1f-2a3b-4c5d6e7f8a9b"), NombreGenero = Genero.GeneroPelicula.Drama },
-            new Genero { IdGenero = Guid.Parse("5f6a7b8c-9d0e-1f2a-3b4c-5d6e7f8a9b0c"), NombreGenero = Genero.GeneroPelicula.Romance }
-        };
+        // Datos de Películas
+        var pelicula1Guid = Guid.Parse("78901234-7890-7890-7890-7890123456a1");
+        var pelicula2Guid = Guid.Parse("89012345-8901-8901-8901-8901234567b2");
+        var pelicula3Guid = Guid.Parse("90123456-9012-9012-9012-9012345678c3");
 
-        var peliculas = new List<Pelicula>
-        {
+        modelBuilder.Entity<Pelicula>().HasData(
             new Pelicula
             {
-                IdPelicula = Guid.Parse("6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"), TituloPelicula = "Película 1",
-                DuracionPelicula = TimeOnly.Parse("01:30"), DescripcionPelicula = "Una película de acción.",
-                ClasificacionPelicula = 5, IdGenero = generos[0].IdGenero
+                IdPelicula = pelicula1Guid,
+                TituloPelicula = "Accion Épica",
+                DuracionPelicula = new TimeOnly(2, 30),
+                DescripcionPelicula = "Una emocionante aventura de acción.",
+                ClasificacionPelicula = 5,
+                IdGenero = accionGuid
             },
             new Pelicula
             {
-                IdPelicula = Guid.Parse("7b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e"), TituloPelicula = "Película 2",
-                DuracionPelicula = TimeOnly.Parse("02:00"), DescripcionPelicula = "Una comedia romántica.",
-                ClasificacionPelicula = 4, IdGenero = generos[1].IdGenero
+                IdPelicula = pelicula2Guid,
+                TituloPelicula = "Comedia Ligera",
+                DuracionPelicula = new TimeOnly(1, 45),
+                DescripcionPelicula = "Una comedia divertida para toda la familia.",
+                ClasificacionPelicula = 3,
+                IdGenero = comediaGuid
             },
             new Pelicula
             {
-                IdPelicula = Guid.Parse("8c9d0e1f-2a3b-4c5d-6e7f-8a9b0c1d2e3f"), TituloPelicula = "Película 3",
-                DuracionPelicula = TimeOnly.Parse("01:45"), DescripcionPelicula = "Un drama familiar.",
-                ClasificacionPelicula = 3, IdGenero = generos[2].IdGenero
+                IdPelicula = pelicula3Guid,
+                TituloPelicula = "Drama Intenso",
+                DuracionPelicula = new TimeOnly(2, 0),
+                DescripcionPelicula = "Un drama que te dejará sin aliento.",
+                ClasificacionPelicula = 4,
+                IdGenero = dramaGuid
             }
-        };
+        );
 
-        var historiales = new List<Historial>
-        {
+        // Relación Película-Género
+        modelBuilder.Entity<PeliculaGenero>().HasData(
+            new PeliculaGenero { IdPelicula = pelicula1Guid, IdGenero = accionGuid },
+            new PeliculaGenero { IdPelicula = pelicula2Guid, IdGenero = comediaGuid },
+            new PeliculaGenero { IdPelicula = pelicula3Guid, IdGenero = dramaGuid },
+            new PeliculaGenero
+                { IdPelicula = pelicula1Guid, IdGenero = comediaGuid } // Película 1 también clasificada como Comedia
+        );
+
+        // Datos de Historial
+        modelBuilder.Entity<Historial>().HasData(
             new Historial
             {
-                IdHistorial = Guid.Parse("9d0e1f2a-3b4c-5d6e-7f8a-9b0c1d2e3f4a"), IdPelicula = peliculas[0].IdPelicula,
-                IdUsuario = usuarios[0].IdUsuario, FechaVista = DateOnly.Parse("2024-01-01")
+                IdHistorial = Guid.Parse("01234567-0123-0123-0123-0123456789d4"),
+                IdPelicula = pelicula1Guid,
+                IdUsuario = usuario1Guid,
+                FechaVista = new DateOnly(2024, 1, 15)
             },
             new Historial
             {
-                IdHistorial = Guid.Parse("0e1f2a3b-4c5d-6e7f-8a9b-0c1d2e3f4a5b"), IdPelicula = peliculas[1].IdPelicula,
-                IdUsuario = usuarios[1].IdUsuario, FechaVista = DateOnly.Parse("2024-02-01")
+                IdHistorial = Guid.Parse("11234567-1123-1123-1123-1123456789e5"),
+                IdPelicula = pelicula2Guid,
+                IdUsuario = usuario1Guid,
+                FechaVista = new DateOnly(2024, 2, 20)
             },
             new Historial
             {
-                IdHistorial = Guid.Parse("1f2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c"), IdPelicula = peliculas[2].IdPelicula,
-                IdUsuario = usuarios[2].IdUsuario, FechaVista = DateOnly.Parse("2024-03-01")
+                IdHistorial = Guid.Parse("21234567-2123-2123-2123-2123456789f6"),
+                IdPelicula = pelicula3Guid,
+                IdUsuario = usuario2Guid,
+                FechaVista = new DateOnly(2024, 3, 10)
+            },
+            new Historial
+            {
+                IdHistorial = Guid.Parse("31234567-3123-3123-3123-3123456789a7"),
+                IdPelicula = pelicula1Guid,
+                IdUsuario = usuario2Guid,
+                FechaVista = new DateOnly(2024, 4, 5)
             }
-        };
-
-        var peliculaGeneros = new List<PeliculaGenero>
-        {
-            new PeliculaGenero { IdPelicula = peliculas[0].IdPelicula, IdGenero = generos[0].IdGenero },
-            new PeliculaGenero { IdPelicula = peliculas[1].IdPelicula, IdGenero = generos[1].IdGenero },
-            new PeliculaGenero { IdPelicula = peliculas[2].IdPelicula, IdGenero = generos[2].IdGenero }
-        };
+        );
 
         base.OnModelCreating(modelBuilder);
     }
