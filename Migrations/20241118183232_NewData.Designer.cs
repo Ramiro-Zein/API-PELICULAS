@@ -4,6 +4,7 @@ using API_PELICULAS.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_PELICULAS.Migrations
 {
     [DbContext(typeof(PeliculasDbContext))]
-    partial class PeliculasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241118183232_NewData")]
+    partial class NewData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,58 +310,6 @@ namespace API_PELICULAS.Migrations
                     b.HasIndex("IdGenero");
 
                     b.ToTable("PeliculaGenero");
-
-                    b.HasData(
-                        new
-                        {
-                            IdPelicula = new Guid("78901234-7890-7890-7890-7890123456a1"),
-                            IdGenero = new Guid("12345678-1234-1234-1234-1234567890ab")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("89012345-8901-8901-8901-8901234567b2"),
-                            IdGenero = new Guid("23456789-2345-2345-2345-2345678901bc")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("90123456-9012-9012-9012-9012345678c3"),
-                            IdGenero = new Guid("34567890-3456-3456-3456-3456789012cd")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("12345678-5678-1234-1234-5678901234de"),
-                            IdGenero = new Guid("45678901-4567-4567-4567-4567890123de")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("23456789-6789-2345-2345-6789012345fe"),
-                            IdGenero = new Guid("56789012-5678-5678-5678-5678901234ef")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("34567890-7890-3456-3456-7890123456af"),
-                            IdGenero = new Guid("67890123-6789-6789-6789-6789012345fa")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("45678901-8901-4567-4567-8901234567bf"),
-                            IdGenero = new Guid("78901234-7890-7890-7890-7890123456ac")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("56789012-9012-5678-5678-9012345678cf"),
-                            IdGenero = new Guid("89012345-8901-8901-8901-8901234567bd")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("67890123-0123-6789-6789-0123456789df"),
-                            IdGenero = new Guid("90123456-9012-9012-9012-9012345678ce")
-                        },
-                        new
-                        {
-                            IdPelicula = new Guid("78901234-1234-7890-7890-1234567890ef"),
-                            IdGenero = new Guid("01234567-0123-0123-0123-0123456789df")
-                        });
                 });
 
             modelBuilder.Entity("API_PELICULAS.Models.Usuario", b =>
@@ -386,15 +337,15 @@ namespace API_PELICULAS.Migrations
                         new
                         {
                             IdUsuario = new Guid("56789012-5678-5678-5678-5678901234ef"),
-                            ClaveUsuario = "$2a$11$LoTgvLFehmE39wHanK7thOOLhXBByAFlIbsCQ8JiSo40BGYCK9aru",
+                            ClaveUsuario = "$2a$11$7zWsIQRQwsEdIFZ5SC8EwuB2FCjmWB59wWpm5bY.2tBIrB4csqtga",
                             EstatusUsuario = 1,
                             NombreUsuario = "ramiro.zein"
                         },
                         new
                         {
                             IdUsuario = new Guid("67890123-6789-6789-6789-6789012345f0"),
-                            ClaveUsuario = "$2a$11$iwSGyOFRPz/7DK8.05EVUeYVjA4IHvxNRkyEXWZNDftBKB5A0nAE.",
-                            EstatusUsuario = 1,
+                            ClaveUsuario = "$2a$11$5cOyYheOe6KnO1MXR4NVG.aj8SSY6VNO.KtdTgi9./e4scFCApLd.",
+                            EstatusUsuario = 0,
                             NombreUsuario = "maria.lopez"
                         });
                 });

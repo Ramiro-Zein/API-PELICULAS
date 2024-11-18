@@ -1,4 +1,4 @@
-using API_PELICULAS.DatabaseContext;
+using API_PELICULAS.Database;
 using API_PELICULAS.DTO;
 using API_PELICULAS.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +28,7 @@ public class RegistroController(PeliculasDbContext _context) : Controller
         await _context.Usuarios.AddAsync(usuario);
         await _context.SaveChangesAsync();
 
-        var historial = new Historial
+        var historial = new Models.Historial
         {
             IdHistorial = Guid.NewGuid(),
             IdPelicula = _context.Peliculas.First().IdPelicula,

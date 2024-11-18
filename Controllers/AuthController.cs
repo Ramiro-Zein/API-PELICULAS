@@ -1,4 +1,4 @@
-﻿using API_PELICULAS.DatabaseContext;
+﻿using API_PELICULAS.Database;
 using API_PELICULAS.DTO;
 using API_PELICULAS.Interfaces;
 using Microsoft.AspNetCore.Mvc;

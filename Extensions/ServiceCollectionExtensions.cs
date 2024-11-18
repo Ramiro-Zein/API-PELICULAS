@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using API_PELICULAS.DatabaseContext;
+using API_PELICULAS.Database;
 using API_PELICULAS.Interfaces;
 using API_PELICULAS.Services;
 using Microsoft.EntityFrameworkCore;

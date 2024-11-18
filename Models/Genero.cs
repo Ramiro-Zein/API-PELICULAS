@@ -15,5 +15,14 @@ public class Genero
         Comedia,
         Drama,
         Terror,
+        Fantasía,
+        Documental,
+        Musical,
+        Aventura,
+        Thriller,
+        Animación,
+        Biografía,
+        Deportes,
+        Misterio
     }
 }
