@@ -9,7 +9,7 @@ public class PeliculasDbContext : DbContext
     {
     }
 
-    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Usuario?> Usuarios { get; set; }
     public DbSet<Historial> Historiales { get; set; }
     public DbSet<Pelicula> Peliculas { get; set; }
     public DbSet<Genero> Generos { get; set; }
@@ -47,12 +47,14 @@ public class PeliculasDbContext : DbContext
         var comediaGuid = Guid.Parse("23456789-2345-2345-2345-2345678901bc");
         var dramaGuid = Guid.Parse("34567890-3456-3456-3456-3456789012cd");
         var romanceGuid = Guid.Parse("45678901-4567-4567-4567-4567890123de");
+        var terrorGuid = Guid.Parse("34567890-3456-3456-3456-3456789012ab");
 
         modelBuilder.Entity<Genero>().HasData(
             new Genero { IdGenero = accionGuid, NombreGenero = Genero.GeneroPelicula.Accion },
             new Genero { IdGenero = comediaGuid, NombreGenero = Genero.GeneroPelicula.Comedia },
             new Genero { IdGenero = dramaGuid, NombreGenero = Genero.GeneroPelicula.Drama },
-            new Genero { IdGenero = romanceGuid, NombreGenero = Genero.GeneroPelicula.Romance }
+            new Genero { IdGenero = romanceGuid, NombreGenero = Genero.GeneroPelicula.Romance },
+            new Genero { IdGenero = terrorGuid, NombreGenero = Genero.GeneroPelicula.Terror}
         );
 
         // Datos de Usuarios
@@ -62,12 +64,14 @@ public class PeliculasDbContext : DbContext
         modelBuilder.Entity<Usuario>().HasData(
             new Usuario
             {
-                IdUsuario = usuario1Guid, NombreUsuario = "ramiro.zein", ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("1234"),
+                IdUsuario = usuario1Guid, NombreUsuario = "ramiro.zein",
+                ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("1234"),
                 EstatusUsuario = Usuario.Estatus.Activo
             },
             new Usuario
             {
-                IdUsuario = usuario2Guid, NombreUsuario = "maria.lopez", ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("nel"),
+                IdUsuario = usuario2Guid, NombreUsuario = "maria.lopez",
+                ClaveUsuario = BCrypt.Net.BCrypt.HashPassword("nel"),
                 EstatusUsuario = Usuario.Estatus.Inactivo
             }
         );

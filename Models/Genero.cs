@@ -13,6 +13,7 @@ public class Genero
         Accion,
         Romance,
         Comedia,
-        Drama
+        Drama,
+        Terror,
     }
 }

@@ -35,7 +35,8 @@ public static class ServiceCollectionExtensions
             {
                 options.LoginPath = "/api/auth/login";
                 options.LogoutPath = "/api/auth/logout";
-                options.Cookie.Name = "UbamAuthCookie";
+                options.Cookie.HttpOnly = true;
             });
+
     }
 }
