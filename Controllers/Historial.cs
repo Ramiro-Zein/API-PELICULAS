@@ -1,6 +1,5 @@
 using API_PELICULAS.Database;
 using API_PELICULAS.DTO;
-using API_PELICULAS.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PELICULAS.Controllers;

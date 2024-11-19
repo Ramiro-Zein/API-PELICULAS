@@ -17,7 +17,7 @@ public class AuthController(IAuthService authService, PeliculasDbContext context
             return Unauthorized("Credenciales incorrectas");
 
         var usuario = await context.Usuarios.FirstOrDefaultAsync(u =>
-                EF.Functions.Collate(u.NombreUsuario, "Latin1_General_BIN") == respuesta.NombreUsuario);
+            EF.Functions.Collate(u.NombreUsuario, "Latin1_General_BIN") == respuesta.NombreUsuario);
 
         if (usuario == null) return Unauthorized("Credenciales incorrectas");
 
@@ -47,12 +47,13 @@ public class AuthController(IAuthService authService, PeliculasDbContext context
                                 GeneroPelicula = new GeneroDTO
                                 {
                                     IdGenero = h.Pelicula.IdGenero,
-                                    NombreGenero = h.Pelicula.PeliculaGeneros.Select(g => g.Genero.NombreGenero.ToString())
+                                    NombreGenero =
+                                        h.Pelicula.PeliculaGeneros.Select(g => g.Genero.NombreGenero.ToString())
                                 }
                             }
                         }).ToList()
                 })
-                .FirstOrDefaultAsync() // Asegura que solo devuelves el primer usuario encontrado
+                .FirstOrDefaultAsync()
         };
 
         return Ok(respuestaDto);

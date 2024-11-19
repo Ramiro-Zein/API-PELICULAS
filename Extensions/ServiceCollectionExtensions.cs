@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using API_PELICULAS.DataAccess.Repositories;
 using API_PELICULAS.Database;
 using API_PELICULAS.Interfaces;
 using API_PELICULAS.Services;
@@ -26,6 +27,8 @@ public static class ServiceCollectionExtensions
         // Configuración de la base de datos
         services.AddDbContext<PeliculasDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<RPelicula>();
 
         // Configuración de Autenticación
         services.AddScoped<IAuthService, AuthService>();
