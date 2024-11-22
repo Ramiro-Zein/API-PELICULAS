@@ -25,35 +25,7 @@ public class AuthController(IAuthService authService, PeliculasDbContext context
         {
             Mensaje = "Bienvenido",
             NombreUsuario = usuario.NombreUsuario,
-            Historial = await context.Usuarios
-                .Where(u => u.IdUsuario == usuario.IdUsuario)
-                .Where(u => u.Historiales.Any())
-                .Select(u => new UsuarioRespuestaDTO
-                {
-                    IdUsuario = u.IdUsuario,
-                    NombreUsuario = u.NombreUsuario,
-                    Historiales = u.Historiales
-                        .Select(h => new HistorialDTO
-                        {
-                            IdHistorial = h.IdHistorial,
-                            FechaVista = h.FechaVista,
-                            Pelicula = new PeliculaDTO
-                            {
-                                IdPelicula = h.Pelicula.IdPelicula,
-                                TituloPelicula = h.Pelicula.TituloPelicula,
-                                DuracionPelicula = h.Pelicula.DuracionPelicula,
-                                DescripcionPelicula = h.Pelicula.DescripcionPelicula,
-                                ClasificacionPelicula = h.Pelicula.ClasificacionPelicula,
-                                GeneroPelicula = new GeneroDTO
-                                {
-                                    IdGenero = h.Pelicula.IdGenero,
-                                    NombreGenero =
-                                        h.Pelicula.PeliculaGeneros.Select(g => g.Genero.NombreGenero.ToString())
-                                }
-                            }
-                        }).ToList()
-                })
-                .FirstOrDefaultAsync()
+            IdUsuario = usuario.IdUsuario
         };
 
         return Ok(respuestaDto);

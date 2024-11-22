@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
         {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
-
+        
         // Configuración de la base de datos
         services.AddDbContext<PeliculasDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
@@ -40,6 +40,6 @@ public static class ServiceCollectionExtensions
                 options.LogoutPath = "/api/auth/logout";
                 options.Cookie.HttpOnly = true;
             });
-
+        
     }
 }
