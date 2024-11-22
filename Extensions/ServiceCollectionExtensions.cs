@@ -41,5 +41,14 @@ public static class ServiceCollectionExtensions
                 options.Cookie.HttpOnly = true;
             });
         
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
     }
 }

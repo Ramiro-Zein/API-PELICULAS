@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using API_PELICULAS.Models;
 
 namespace API_PELICULAS.DTO;
@@ -10,5 +11,5 @@ public class PeliculaDTO
     public TimeOnly DuracionPelicula { get; set; }
     public string DescripcionPelicula { get; set; }
     public int ClasificacionPelicula { get; set; }
-    public GeneroDTO GeneroPelicula { get; set; }
+    [JsonIgnore] public GeneroDTO GeneroPelicula { get; set; }
 }
