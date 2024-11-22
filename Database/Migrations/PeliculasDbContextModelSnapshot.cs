@@ -33,7 +33,7 @@ namespace API_PELICULAS.Migrations
 
                     b.HasKey("IdGenero");
 
-                    b.ToTable("Generos");
+                    b.ToTable("Generos", (string)null);
 
                     b.HasData(
                         new
@@ -129,7 +129,7 @@ namespace API_PELICULAS.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("Historiales");
+                    b.ToTable("Historiales", (string)null);
 
                     b.HasData(
                         new
@@ -199,7 +199,7 @@ namespace API_PELICULAS.Migrations
 
                     b.HasIndex("GeneroPeliculaIdGenero");
 
-                    b.ToTable("Peliculas");
+                    b.ToTable("Peliculas", (string)null);
 
                     b.HasData(
                         new
@@ -306,7 +306,7 @@ namespace API_PELICULAS.Migrations
 
                     b.HasIndex("IdGenero");
 
-                    b.ToTable("PeliculaGenero");
+                    b.ToTable("PeliculaGenero", (string)null);
 
                     b.HasData(
                         new
@@ -380,7 +380,7 @@ namespace API_PELICULAS.Migrations
 
                     b.HasKey("IdUsuario");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
 
                     b.HasData(
                         new

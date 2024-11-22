@@ -12,5 +12,5 @@ public class Pelicula
     
     public Genero? GeneroPelicula { get; set; }
     public Guid IdGenero { get; set; }
-    public ICollection<PeliculaGenero> PeliculaGeneros { get; set; }
+    public ICollection<PeliculaGenero> PeliculaGeneros { get; set; } = null!;
 }

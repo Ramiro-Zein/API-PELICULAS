@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Peliculas@ZEIN" uuid="f9593480-49a0-447f-b02a-3795cc7b4f35">
+    <data-source source="LOCAL" name="Peliculas@ZEIN" uuid="d856396b-8a7d-4b79-9f0a-8d8d7242ae95">
       <driver-ref>sqlserver.jb</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
       <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
-      <jdbc-url>Server=ZEIN;Database=Peliculas;User ID=ramiro;Password=123;TrustServerCertificate=True;Connection Timeout=30;</jdbc-url>
+      <jdbc-url>Server=ZEIN;Database=Peliculas;User ID=ramiro-zein;Password=1234;TrustServerCertificate=True;Connection Timeout=30;</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
