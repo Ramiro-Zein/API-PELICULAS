@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using API_PELICULAS.Models;
 
 namespace API_PELICULAS.DTO;
 

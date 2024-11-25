@@ -1,44 +1,29 @@
-using API_PELICULAS.Database;
+using API_PELICULAS.DataAccess.Repositories;
 using API_PELICULAS.DTO;
-using API_PELICULAS.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_PELICULAS.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RegistroController(PeliculasDbContext _context) : Controller
+public class RegistroController(RRegistro rRegistro) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> RegistrarUsuario([FromBody] UsuarioDto usuarioDto)
     {
-        if (_context.Usuarios.Any(u => u.NombreUsuario == usuarioDto.NombreUsuario))
+        try
         {
-            return BadRequest(new { mensaje = "El usuario ya existe" });
+            var resultado = await rRegistro.RegistrarUsuarioAsync(usuarioDto);
+            if (resultado == "El usuario ya existe")
+            {
+                return BadRequest(new { mensaje = resultado });
+            }
+
+            return Ok(new { mensaje = resultado });
         }
-
-        var usuario = new Usuario
+        catch (Exception ex)
         {
-            IdUsuario = Guid.NewGuid(),
-            NombreUsuario = usuarioDto.NombreUsuario,
-            ClaveUsuario = BCrypt.Net.BCrypt.HashPassword(usuarioDto.ClaveUsuario),
-            EstatusUsuario = Usuario.Estatus.Activo
-        };
-
-        await _context.Usuarios.AddAsync(usuario);
-        await _context.SaveChangesAsync();
-
-        var historial = new Models.Historial
-        {
-            IdHistorial = Guid.NewGuid(),
-            IdPelicula = _context.Peliculas.First().IdPelicula,
-            IdUsuario = usuario.IdUsuario,
-            FechaVista = DateOnly.FromDateTime(DateTime.Now)
-        };
-
-        await _context.Historiales.AddAsync(historial);
-        await _context.SaveChangesAsync();
-
-        return Ok(new { mensaje = "Usuario registrado exitosamente" });
+            return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+        }
     }
 }

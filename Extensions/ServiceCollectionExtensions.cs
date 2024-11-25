@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using API_PELICULAS.DataAccess.Interfaces;
+using API_PELICULAS.DataAccess.Repositories;
 using API_PELICULAS.Database;
-using API_PELICULAS.Interfaces;
-using API_PELICULAS.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -22,13 +22,19 @@ public static class ServiceCollectionExtensions
         {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
-
+        
         // Configuración de la base de datos
         services.AddDbContext<PeliculasDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<RPelicula>();
+
         // Configuración de Autenticación
-        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAuth, RAuth>();
+        services.AddScoped<RHistorial>();
+        services.AddScoped<RPelicula>();
+        services.AddScoped<RRegistro>();
+        
         services.AddHttpContextAccessor();
         services.AddAuthentication("Cookies")
             .AddCookie(options =>
@@ -37,6 +43,6 @@ public static class ServiceCollectionExtensions
                 options.LogoutPath = "/api/auth/logout";
                 options.Cookie.HttpOnly = true;
             });
-
+        
     }
 }
