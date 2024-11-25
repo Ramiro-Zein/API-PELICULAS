@@ -22,19 +22,20 @@ public static class ServiceCollectionExtensions
         {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
-
+        
         // Configuración de la base de datos
         services.AddDbContext<PeliculasDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<RPelicula>();
+
         // Configuración de Autenticación
-        services.AddScoped<IAuth, Auth>();
+        services.AddScoped<IAuth, RAuth>();
+        services.AddScoped<RHistorial>();
         services.AddScoped<RPelicula>();
         services.AddScoped<RRegistro>();
-        services.AddScoped<RHistorial>();
         
         services.AddHttpContextAccessor();
-        
         services.AddAuthentication("Cookies")
             .AddCookie(options =>
             {
@@ -42,6 +43,6 @@ public static class ServiceCollectionExtensions
                 options.LogoutPath = "/api/auth/logout";
                 options.Cookie.HttpOnly = true;
             });
-
+        
     }
 }

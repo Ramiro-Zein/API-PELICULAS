@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_PELICULAS.DataAccess.Repositories;
 
-public class Auth(PeliculasDbContext context, IHttpContextAccessor httpContextAccessor) : IAuth
+public class RAuth(PeliculasDbContext context, IHttpContextAccessor httpContextAccessor) : IAuth
 {
     public async Task<bool> ValidarUsuario(string nombreUsuario, string clave)
     {
