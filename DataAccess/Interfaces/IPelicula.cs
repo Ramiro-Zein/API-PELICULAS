@@ -4,5 +4,7 @@ namespace API_PELICULAS.DataAccess.Interfaces;
 
 public interface IPelicula
 {
-    Task<List<PeliculaDTO>> GetAllAsync();
+    Task<PeliculaDTO> GetByIdPeliculaAsync(Guid id);
+    Task<List<PeliculaDTO>> GetAllPeliculaAsync();
+    
 }

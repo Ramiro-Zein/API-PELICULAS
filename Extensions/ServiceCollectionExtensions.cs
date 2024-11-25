@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+using API_PELICULAS.DataAccess.Interfaces;
+using API_PELICULAS.DataAccess.Repositories;
 using API_PELICULAS.Database;
-using API_PELICULAS.Interfaces;
-using API_PELICULAS.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -28,8 +28,13 @@ public static class ServiceCollectionExtensions
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         // Configuración de Autenticación
-        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAuth, Auth>();
+        services.AddScoped<RPelicula>();
+        services.AddScoped<RRegistro>();
+        services.AddScoped<RHistorial>();
+        
         services.AddHttpContextAccessor();
+        
         services.AddAuthentication("Cookies")
             .AddCookie(options =>
             {

@@ -1,6 +1,6 @@
-﻿using API_PELICULAS.Database;
+﻿using API_PELICULAS.DataAccess.Interfaces;
+using API_PELICULAS.Database;
 using API_PELICULAS.DTO;
-using API_PELICULAS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,12 +8,12 @@ namespace API_PELICULAS.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(IAuthService authService, PeliculasDbContext context) : ControllerBase
+public class AuthController(IAuth auth, PeliculasDbContext context) : ControllerBase
 {
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginSolicitarDto respuesta)
     {
-        if (!await authService.ValidarUsuario(respuesta.NombreUsuario, respuesta.ClaveUsuario))
+        if (!await auth.ValidarUsuario(respuesta.NombreUsuario, respuesta.ClaveUsuario))
             return Unauthorized("Credenciales incorrectas");
 
         var usuario = await context.Usuarios.FirstOrDefaultAsync(u =>
@@ -34,7 +34,7 @@ public class AuthController(IAuthService authService, PeliculasDbContext context
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
-        await authService.CerrarSesion();
+        await auth.CerrarSesion();
         return Ok("Sesión cerrada.");
     }
 }

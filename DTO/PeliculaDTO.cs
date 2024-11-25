@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using API_PELICULAS.Models;
 
 namespace API_PELICULAS.DTO;
 
