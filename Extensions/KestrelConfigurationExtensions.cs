@@ -6,10 +6,14 @@ public static class KestrelConfigurationExtensions
     {
         webHostBuilder.ConfigureKestrel(options =>
         {
-            options.ListenAnyIP(7024, listenOptions =>
+            /*
+            options.ListenAnyIP(7025, listenOptions =>
             {
                 listenOptions.UseHttps();
             });
+            */
+            
+            options.ListenAnyIP(7024);
         });
     }
 }
