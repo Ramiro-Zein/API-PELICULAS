@@ -10,7 +10,7 @@ public class RHistorial(PeliculasDbContext context) : IHistorial
 {
     public async Task<List<HistorialDTO>> GetAllHistorialAsync()
     {
-        return await context.Historiales
+        var Historiales = await context.Historiales
             .Select(h => new HistorialDTO
             {
                 IdHistorial = h.IdHistorial,
@@ -32,11 +32,13 @@ public class RHistorial(PeliculasDbContext context) : IHistorial
                 FechaVista = h.FechaVista
             })
             .ToListAsync();
+
+        return Historiales;
     }
 
     public async Task<List<HistorialDTO>> GetHistorialByUsuarioAsync(Guid idUsuario)
     {
-        return await context.Historiales
+        var historial = await context.Historiales
             .Where(h => h.IdUsuario == idUsuario)
             .Select(h => new HistorialDTO
             {
@@ -59,6 +61,8 @@ public class RHistorial(PeliculasDbContext context) : IHistorial
                 FechaVista = h.FechaVista
             })
             .ToListAsync();
+
+        return historial;
     }
 
     public async Task<string> AgregarHistorialAsync(HistorialRequest request)

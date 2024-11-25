@@ -9,7 +9,7 @@ namespace API_PELICULAS.Controllers;
 public class PeliculaController(RPelicula rPelicula) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PeliculaDTO>>> GetAlumnos()
+    public async Task<ActionResult<IEnumerable<PeliculaDTO>>> GetAllPeliculas()
     {
         try
         {
