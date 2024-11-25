@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using API_PELICULAS.DataAccess.Interfaces;
 using API_PELICULAS.DataAccess.Repositories;
 using API_PELICULAS.Database;
